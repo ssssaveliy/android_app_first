@@ -24,7 +24,7 @@ class SquaresAdapter : RecyclerView.Adapter<SquareViewHolder>() {
 
     override fun onBindViewHolder(holder: SquareViewHolder, position: Int) {
         val item = items[position]
-        holder.bind(item.index, isEven = item.index % 2 == 0)
+        holder.bind(item.text, item.colorRes)
     }
 
     override fun getItemCount() = items.size

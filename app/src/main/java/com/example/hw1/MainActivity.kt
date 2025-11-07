@@ -1,5 +1,6 @@
 package com.example.hw1
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,8 +20,10 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         val fab: FloatingActionButton = findViewById(R.id.fab)
 
-        val span = if (resources.configuration.orientation ==
-            android.content.res.Configuration.ORIENTATION_PORTRAIT) 3 else 4
+        val span = if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+            resources.getInteger(R.integer.span_portrait)
+        else
+            resources.getInteger(R.integer.span_landscape)
         recyclerView.layoutManager = GridLayoutManager(this, span)
         recyclerView.adapter = adapter
 
@@ -33,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         )
         recyclerView.clipToPadding = false
 
-        val count = savedInstanceState?.getInt("count") ?: 9
+        val initialCount = resources.getInteger(R.integer.initial_count)
+        val count = savedInstanceState?.getInt("count") ?: initialCount
         items.clear()
         repeat(count) { items += Item(it) }
         adapter.setItems(items)

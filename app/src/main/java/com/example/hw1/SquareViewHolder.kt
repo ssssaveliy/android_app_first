@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class SquareViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val label: TextView = view.findViewById(R.id.label)
-    fun bind(index: Int, isEven: Boolean) {
-        label.text = index.toString()
-        val color = if (isEven) R.color.redItem else R.color.blueItem
+    fun bind(text: String, colorRes: Int) {
+        label.text = text
         label.setBackgroundColor(
-            ContextCompat.getColor(itemView.context, color)
+            ContextCompat.getColor(itemView.context, colorRes)
         )
     }
 }
